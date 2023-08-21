@@ -758,6 +758,10 @@ video {
   height: 100%;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .min-h-\[192px\] {
   min-height: 192px;
 }
