@@ -1,930 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Killua Bot</title>
-        <link href="./dist/output.css" rel="stylesheet" />
-        <link rel="stylesheet" href="./public/style.css" />
-        <script src="./public/script.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"></script>
-        <link rel="icon" href="./assets/img/Hunter X Hunter Killua Zoldyck Sticker.png">
-        <script src="https://cdn.jsdelivr.net/npm/ol@v7.5.1/dist/ol.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.5.1/ol.css">
-        <meta name="google-site-verification" content="J7OPS1q3vlEBJX57uQWoza2kVzRspxn0RhsNC5M77ps" />
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Killua Bot</title>
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./public/style.css" />
+    <script src="./public/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"></script>
+    <link rel="icon" href="./assets/img/Hunter X Hunter Killua Zoldyck Sticker.png">
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.5.1/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.5.1/ol.css">
+    <meta name="google-site-verification" content="J7OPS1q3vlEBJX57uQWoza2kVzRspxn0RhsNC5M77ps" />
+    <!-- Google Analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    <body class="font-poppins overflow-x-hidden dark-mode bg-[#E3FDFD] dark:bg-slate-800 dark:text-white scroll-smooth">
+        ga('create', 'UA-XXXXX-Y', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+</head>
 
-        <div class="md:flex flex-col md:flex-row md:min-h-screen w-full bg-[#E3FDFD] dark:bg-slate-800">
-            <div @click.away="open = false"
-                class="z-[99] fixed md:relative top-0 flex flex-col w-full md:w-64 text-gray-700 bg-[#A6E3E9] dark:text-gray-200 dark:bg-gray-700 flex-shrink-0 md:py-0 py-1"
-                x-data="{ open: false }">
-                <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between ">
-                    <img draggable="false" src="./assets/img/Hunter X Hunter Killua Zoldyck Sticker.png"
-                        alt="Killua Bot" class="hidden md:block md:w-[80px]">
-                    <p id="killua-bot-link"
-                        class="cursor-pointer text-lg md:text-xl font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
-                        Killua
-                        Bot</p>
-                    <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
+<body class="font-poppins overflow-x-hidden dark-mode bg-[#E3FDFD] dark:bg-slate-800 dark:text-white scroll-smooth">
+
+    <div class="md:flex flex-col md:flex-row md:min-h-screen w-full bg-[#E3FDFD] dark:bg-slate-800">
+        <div @click.away="open = false"
+            class="z-[99] fixed md:relative top-0 flex flex-col w-full md:w-64 text-gray-700 bg-[#A6E3E9] dark:text-gray-200 dark:bg-gray-700 flex-shrink-0 md:py-0 py-1"
+            x-data="{ open: false }">
+            <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between ">
+                <img draggable="false" src="./assets/img/Hunter X Hunter Killua Zoldyck Sticker.png" alt="Killua Bot"
+                    class="hidden md:block md:w-[80px]">
+                <p id="killua-bot-link"
+                    class="cursor-pointer text-lg md:text-xl font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">
+                    Killua
+                    Bot</p>
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{'block': open, 'hidden': !open}"
+                class="bg-[#A6E3E9] dark:bg-slate-700 flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto ">
+                <a draggable="false"
+                    class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
+                    href="#">
+                    <i class="fas fa-chart-line mr-2"></i> Dashboard
+                </a>
+                <a draggable="false"
+                    class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
+                    href="#">
+                    <i class="fas fa-list-ul mr-2"></i> Rules
+                </a>
+                <a draggable="false"
+                    class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
+                    href="#">
+                    <i class="fas fa-info-circle mr-2"></i> About
+                </a>
+                <a draggable="false"
+                    class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
+                    href="#">
+                    <i class="fas fa-envelope mr-2"></i> Contact
+                </a>
+                <div class="darkmode-switch mx-3 mt-2">
+                    <input type="checkbox" id="dark-mode-toggle" class="hidden">
+                    <label for="dark-mode-toggle"></label>
                 </div>
-                <nav :class="{'block': open, 'hidden': !open}"
-                    class="bg-[#A6E3E9] dark:bg-slate-700 flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto ">
-                    <a draggable="false"
-                        class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
-                        href="#">
-                        <i class="fas fa-chart-line mr-2"></i> Dashboard
-                    </a>
-                    <a draggable="false"
-                        class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
-                        href="#">
-                        <i class="fas fa-list-ul mr-2"></i> Rules
-                    </a>
-                    <a draggable="false"
-                        class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
-                        href="#">
-                        <i class="fas fa-info-circle mr-2"></i> About
-                    </a>
-                    <a draggable="false"
-                        class="sidebar-menu-item block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-[#71C9CE] focus:bg-[#71C9CE] focus:outline-none focus:shadow-outline"
-                        href="#">
-                        <i class="fas fa-envelope mr-2"></i> Contact
-                    </a>
-                    <div class="darkmode-switch mx-3 mt-2">
-                        <input type="checkbox" id="dark-mode-toggle" class="hidden">
-                        <label for="dark-mode-toggle"></label>
-                    </div>
-                </nav>
+            </nav>
+        </div>
+
+        <div id="dashboardDiv" class="content-div container mx-auto md:mt-1 mt-16 p-4 ">
+            <!-- Header Dashboard -->
+            <div class="mb-10 bg-[#CBF1F5] p-4 dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold">
+                    <i class="fas fa-chart-line text-gray-600 mr-2 dark:text-white"></i> Dashboard
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Dashboard Cards/Widgets -->
+                <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                    <h2 class="text-lg font-semibold mb-2 dark:text-white">
+                        <i class="fas fa-envelope-open-text mr-2"></i>
+                        Total Messages
+                    </h2>
+                    <p class="text-xl font-bold dark:text-white" id="totalMessages">1,280</p>
+                </div>
+                <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                    <h2 class="text-lg font-semibold mb-2 dark:text-white">
+                        <i class="fas fa-users mr-2"></i>
+                        Users
+                    </h2>
+                    <p class="text-xl font-bold dark:text-white" id="totalUsers">567</p>
+                </div>
+                <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                    <h2 class="text-lg font-semibold mb-2 dark:text-white">
+                        <i class="fas fa-terminal mr-2"></i>
+                        Commands Executed
+                    </h2>
+                    <p class="text-xl font-bold dark:text-white" id="totalCommands">2,501</p>
+                </div>
+                <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                    <h2 class="text-lg font-semibold mb-2 dark:text-white">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        Server Uptime
+                    </h2>
+                    <p class="text-xl font-bold dark:text-white" id="serverUptime">70.0%</p>
+                </div>
             </div>
 
-            <div id="dashboardDiv" class="content-div container mx-auto md:mt-1 mt-16 p-4 ">
-                <!-- Header Dashboard -->
-                <div class="mb-10 bg-[#CBF1F5] p-4 dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold">
-                        <i class="fas fa-chart-line text-gray-600 mr-2 dark:text-white"></i> Dashboard
-                    </h2>
+
+            <div class="container mt-5">
+                <div class="flex flex-wrap justify-between">
+                    <!-- Bar Chart -->
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-[74%] lg:w-[74%] xl:w-[74%] mb-4 md:mb-0">
+                        <h2 class="text-lg font-semibold mb-2 dark:text-white">
+                            <i class="fas fa-chart-bar mr-2"></i>
+                            Bar Chart
+                        </h2>
+                        <canvas id="barChart"></canvas>
+                    </div>
+
+                    <!-- Doughnut Chart -->
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-1/4 lg:w-1/4 xl:w-1/4 mb-4 md:mb-0">
+                        <h2 class="text-lg font-semibold dark:text-white">
+                            <i class="fas fa-chart-pie mr-2"></i>
+                            Doughnut Chart
+                        </h2>
+
+                        <canvas class="p-5" id="doughnutChart"></canvas>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <!-- Dashboard Cards/Widgets -->
-                    <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
+
+                <div class="flex flex-wrap justify-between mt-5">
+                    <!-- Active Users Right Now -->
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-1/4 lg:w-1/4 xl:w-1/4 mb-4 md:mb-0">
                         <h2 class="text-lg font-semibold mb-2 dark:text-white">
-                            <i class="fas fa-envelope-open-text mr-2"></i>
-                            Total Messages
+                            <i class="fas fa-user-check mr-2"></i>
+                            Active Users Right Now
                         </h2>
-                        <p class="text-xl font-bold dark:text-white" id="totalMessages">1,280</p>
+
+                        <p class="text-xl font-bold" x-text="activeUsers"></p>
+                        <canvas id="activeUsersChart" width="600" height="500"></canvas>
                     </div>
-                    <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
-                        <h2 class="text-lg font-semibold mb-2 dark:text-white">
-                            <i class="fas fa-users mr-2"></i>
-                            Users
-                        </h2>
-                        <p class="text-xl font-bold dark:text-white" id="totalUsers">567</p>
-                    </div>
-                    <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
-                        <h2 class="text-lg font-semibold mb-2 dark:text-white">
-                            <i class="fas fa-terminal mr-2"></i>
-                            Commands Executed
-                        </h2>
-                        <p class="text-xl font-bold dark:text-white" id="totalCommands">2,501</p>
-                    </div>
-                    <div class="bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md">
+
+                    <!-- Line Chart -->
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-[74%] lg:w-[74%] xl:w-[74%]">
                         <h2 class="text-lg font-semibold mb-2 dark:text-white">
                             <i class="fas fa-chart-line mr-2"></i>
-                            Server Uptime
+                            Line Chart
                         </h2>
-                        <p class="text-xl font-bold dark:text-white" id="serverUptime">70.0%</p>
+
+                        <canvas id="lineChart"></canvas>
                     </div>
                 </div>
-
-
-                <div class="container mt-5">
-                    <div class="flex flex-wrap justify-between">
-                        <!-- Bar Chart -->
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-[74%] lg:w-[74%] xl:w-[74%] mb-4 md:mb-0">
-                            <h2 class="text-lg font-semibold mb-2 dark:text-white">
-                                <i class="fas fa-chart-bar mr-2"></i>
-                                Bar Chart
-                            </h2>
-                            <canvas id="barChart"></canvas>
-                        </div>
-
-                        <!-- Doughnut Chart -->
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-1/4 lg:w-1/4 xl:w-1/4 mb-4 md:mb-0">
-                            <h2 class="text-lg font-semibold dark:text-white">
-                                <i class="fas fa-chart-pie mr-2"></i>
-                                Doughnut Chart
-                            </h2>
-
-                            <canvas class="p-5" id="doughnutChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap justify-between mt-5">
-                        <!-- Active Users Right Now -->
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-1/4 lg:w-1/4 xl:w-1/4 mb-4 md:mb-0">
-                            <h2 class="text-lg font-semibold mb-2 dark:text-white">
-                                <i class="fas fa-user-check mr-2"></i>
-                                Active Users Right Now
-                            </h2>
-
-                            <p class="text-xl font-bold" x-text="activeUsers"></p>
-                            <canvas id="activeUsersChart" width="600" height="500"></canvas>
-                        </div>
-
-                        <!-- Line Chart -->
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-80 md:w-[74%] lg:w-[74%] xl:w-[74%]">
-                            <h2 class="text-lg font-semibold mb-2 dark:text-white">
-                                <i class="fas fa-chart-line mr-2"></i>
-                                Line Chart
-                            </h2>
-
-                            <canvas id="lineChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <footer class="dark:text-white md:mt-[65px] mt-10">
-                    <div class="container mx-auto flex justify-between">
-                        <div class="text-xs md:text-base">&copy; 2023 Killua Bot. All rights reserved.</div>
-                        <div class="text-xs md:text-base">More Information</div>
-                    </div>
-                </footer>
             </div>
 
-            <div class="hidden content-div container mx-auto md:mt-1 mt-16 p-4" id="myDiv">
-                <!-- Header Rules -->
-                <div class="mb-10 p-4 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold">
-                        <i class="fas fa-list-ul mr-2"></i> Rules
-                    </h2>
-
+            <footer class="dark:text-white md:mt-[65px] mt-10">
+                <div class="container mx-auto flex justify-between">
+                    <div class="text-xs md:text-base">&copy; 2023 Killua Bot. All rights reserved.</div>
+                    <div class="text-xs md:text-base">More Information</div>
                 </div>
+            </footer>
+        </div>
 
-                <div
-                    class="mb-10 py-32 md:px-96 px-5 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md animate-gradient">
-                    <p class="flex justify-center mb-4 text-xl font-semibold">Let's answer some questions</p>
-                    <div class="relative">
-                        <input type="text" placeholder="Search"
-                            class="text-black w-full px-4 py-2 pl-10 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500">
-                        <div class="absolute top-0 left-0 flex items-center h-full pl-3">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container mx-auto mt-8">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <!-- Peraturan 1 -->
-                        <div id="peraturan1"
-                            class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold">Be respectful and kind</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Use appropriate and respectful language in all interactions.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Peraturan 2 -->
-                        <div id="peraturan2"
-                            class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold">No spam or self-promotion</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Do not post spam or engage in self-promotion.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Peraturan 3 -->
-                        <div id="peraturan3"
-                            class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold">Respect privacy and confidentiality</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Respect the privacy and confidentiality of others.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Peraturan 4 -->
-                        <div id="peraturan4"
-                            class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold">Stay on topic and relevant</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Keep discussions and posts relevant to the topic.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Peraturan 5 -->
-                        <div id="peraturan5"
-                            class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Use respectful language</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Always use respectful and appropriate language in your interactions.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Peraturan 6 -->
-                        <div id="peraturan6"
-                            class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold">Respect diversity and inclusivity</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Embrace and respect diverse perspectives and promote inclusivity.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan7"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Animation Example</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open"
-                                    class="cursor-pointer absolute top-0 right-0 p-3 transition-transform transform"
-                                    :class="{ 'rotate-180': open }">
-                                    <i class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    This section can be toggled with animation.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan8"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Triple Click Example</h2>
-                            <div x-data="{ clickCount: 0 }" @click.away="clickCount = 0">
-                                <div @click="clickCount += 1" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="clickCount < 3"
-                                        class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="clickCount >= 3"
-                                        class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="clickCount >= 3"
-                                    class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    This section is toggled with a triple click.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan9"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Delayed Response</h2>
-                            <div x-data="{ open: false, delay: 1000 }" @click.away="open = false">
-                                <div @click="setTimeout(() => { open = !open }, delay)"
-                                    class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    This section has a delayed response when clicked.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan10"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Custom Colors</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open"
-                                        class="fas fa-chevron-up text-indigo-600 dark:text-indigo-300"></i>
-                                    <i x-show="open"
-                                        class="fas fa-chevron-down text-indigo-600 dark:text-indigo-300"></i>
-                                </div>
-                                <div x-show="open"
-                                    class="md:text-base text-xs mt-2 text-indigo-600 dark:text-indigo-300">
-                                    This section uses custom colors for icons and text.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan11"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Automatic Toggle</h2>
-                            <div x-data="{ open: false }" x-init="setTimeout(() => { open = true }, 3000)">
-                                <div class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    This section automatically toggles after 3 seconds.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan12"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> User Input Example</h2>
-                            <div x-data="{ open: false, userInput: '' }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Please enter your name: <input type="text" x-model="userInput" class="border p-1">
-                                    <p x-show="userInput" class="mt-1">Hello, <span x-text="userInput"></span>!</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan13"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Background Color Animation</h2>
-                            <div x-data="{ open: false, color: 'bg-blue-500' }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div :class="[color, 'p-2', 'rounded-md', 'mt-2', 'transition', 'duration-300']"
-                                    x-show="open">
-                                    This section has an animated background color.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan14"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Data Retrieval Error</h2>
-                            <div x-data="{ open: false, dataError: true }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-red-600 dark:text-red-300"
-                                    x-if="dataError">
-                                    There was an error retrieving data. Please try again later.
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300"
-                                    x-if="!dataError">
-                                    Data retrieved successfully.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan15"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Dropdown Example</h2>
-                            <div x-data="{ open: false, selectedOption: '' }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Select an option:
-                                    <select x-model="selectedOption" class="border p-1">
-                                        <option value="">Choose...</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
-                                    <p x-show="selectedOption" class="mt-1">You selected: <span
-                                            x-text="selectedOption"></span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan16"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Confirmation Button</h2>
-                            <div x-data="{ open: false, confirm: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Are you sure you want to proceed?
-                                    <button @click="confirm = true"
-                                        class="bg-red-500 text-white px-3 py-1 rounded-md ml-2">Yes</button>
-                                    <button @click="confirm = false"
-                                        class="bg-green-500 text-white px-3 py-1 rounded-md ml-2">No</button>
-                                    <p x-show="confirm" class="mt-2 text-red-500">Action confirmed!</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan17"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Server Request Simulation</h2>
-                            <div x-data="{ open: false, loading: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Click the button to simulate a server request:
-                                    <button @click="loading = true; setTimeout(() => { loading = false }, 2000)"
-                                        class="bg-blue-500 text-white px-3 py-1 rounded-md ml-2">
-                                        Make Request
-                                    </button>
-                                    <p x-show="loading" class="mt-2 text-blue-500">Request in progress...</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan18"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Popular Button</h2>
-                            <div x-data="{ open: false }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    This section has a popular button design.
-                                    <button
-                                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg mt-2">
-                                        Click Me!
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan19"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Character Counter</h2>
-                            <div x-data="{ open: false, inputText: '' }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Type something:
-                                    <textarea x-model="inputText" class="border p-1 mt-1" rows="3"></textarea>
-                                    <p class="mt-1"><span x-text="inputText.length"></span> characters entered.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="peraturan20"
-                            class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <h2 class="md:text-xl text-sm font-semibold"> Custom Setting with Slider</h2>
-                            <div x-data="{ open: false, sliderValue: 50 }" @click.away="open = false">
-                                <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
-                                    <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
-                                    <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
-                                </div>
-                                <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
-                                    Adjust the setting:
-                                    <input type="range" x-model="sliderValue" class="mt-1" min="0" max="100" step="1">
-                                    <p class="mt-1">Setting value: <span x-text="sliderValue"></span></p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="mt-5 p-4  dark:text-white ">
-                        <h2 class="text-xl text-center font-semibold">You still have a question?</h2>
-                    </div>
-
-                    <div class="mt-5 grid md:grid-cols-2 gap-4">
-
-                        <div
-                            class="flex flex-col justify-center items-center p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <i class="fab fa-whatsapp text-4xl mb-4"></i>
-                            <p class="text-gray-600 dark:text-gray-300 mb-2">
-                                <a href="https://wa.me/+6285174430116?text=Halo%20%F0%9F%91%8B%20Ada%20yang%20bisa%20saya%20bantu%3F"
-                                    target="_blank" class="text-blue-500 text-xl">+62 85174430116</a>
-                            </p>
-                            <p class="text-sm">We Are Always Happy to Help</p>
-                            <a href="https://wa.me/+6285174430116?text=Halo%20%F0%9F%91%8B%20Ada%20yang%20bisa%20saya%20bantu%3F"
-                                target="_blank" class="hidden md:block text-blue-500 hover:underline">
-                                Contact via WhatsApp
-                            </a>
-                        </div>
-
-
-                        <div
-                            class="flex flex-col justify-center items-center p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
-                            <i class="fas fa-envelope text-4xl mb-4"></i>
-                            <p class="text-gray-600 dark:text-gray-300 mb-2">
-                                <a href="mailto:y4hymhmmd@gmail.com"
-                                    class="text-blue-500 text-xl">y4hymhmmd@gmail.com</a>
-                            </p>
-                            <p class="text-sm">Best way to get answer faster</p>
-                            <a href="mailto:y4hymhmmd@gmail.com" class="hidden md:block text-blue-500 hover:underline">
-                                Contact via Email
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <footer class="dark:text-white md:mt-[15px] mt-10">
-                        <div class="container mx-auto flex justify-between">
-                            <div class="text-xs md:text-base">&copy; 2023 Killua Bot. All rights reserved.</div>
-                            <div class="text-xs md:text-base">More Information</div>
-                        </div>
-                    </footer>
-                </div>
-
+        <div class="hidden content-div container mx-auto md:mt-1 mt-16 p-4" id="myDiv">
+            <!-- Header Rules -->
+            <div class="mb-10 p-4 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold">
+                    <i class="fas fa-list-ul mr-2"></i> Rules
+                </h2>
 
             </div>
 
-            <div class="hidden content-div container mx-auto md:mt-1 mt-16 p-4" id="myDiv">
-                <!-- Header About -->
-                <div class="mb-10 p-4 dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
-                    <h2 class=" text-xl font-semibold"><i class="fas fa-info-circle mr-2"></i>About</h2>
-                </div>
-                <div class="container mt-5">
-                    <div class="flex flex-wrap justify-between">
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full md:w-1/4 lg:w-1/4 xl:w-1/4 mb-4 md:mb-0">
-                            <img draggable="false" class="floating w-auto p-5"
-                                src="./assets/img/Hunter X Hunter Killua Zoldyck Sticker.png" alt="">
-                        </div>
-
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-10 rounded-lg shadow-md  md:w-[74%] lg:w-[74%] xl:w-[74%]">
-                            <h2 class="text-xl font-semibold mb-5 dark:text-white">
-                                <i class="fas fa-robot mr-2"></i> About Killua Bot
-                            </h2>
-
-
-                            <div class="space-y-4 md:text-base text-sm text-justify">
-                                <p class="text-gray-800 dark:text-gray-200 ">
-                                    Welcome to Killua Bot, your ultimate WhatsApp assistant designed to simplify your
-                                    interactions
-                                    and enhance your experience on the platform. Whether you're a business owner, a
-                                    customer
-                                    support professional, or an individual looking for a convenient way to manage tasks,
-                                    Killua
-                                    Bot is here to make your life easier.
-                                </p>
-
-                                <p class="text-gray-800 dark:text-gray-200">
-                                    At Killua Bot, our mission is to empower you with advanced automation and
-                                    intelligent
-                                    responses on WhatsApp. We're committed to helping you save time, improve
-                                    communication,
-                                    and
-                                    optimize your interactions with ease.
-                                </p>
-
-                                <p class="text-gray-800 dark:text-gray-200">
-                                    Experience the future of efficient communication and task management with Killua
-                                    Bot.
-                                    Revolutionize the way you engage with customers, clients, and friends on WhatsApp.
-                                    Contact
-                                    us today to learn more about how Killua Bot can elevate your WhatsApp experience.
-                                </p>
-
-                                <p class="text-gray-800 dark:text-gray-200 cursor-pointer" onclick="toggleFeatures()">
-                                    Key Features <i id="featureToggleIcon" class="fas fa-chevron-down"></i>
-                                </p>
-
-                                <ul id="featuresList" class="list-disc ml-6 space-y-2 hidden dark:text-white">
-                                    <li>Simplify customer interactions with automated responses</li>
-                                    <li>Streamline task management with intelligent reminders</li>
-                                    <li>Enhance communication with customizable templates</li>
-                                    <li>Provide instant customer support with 24/7 availability</li>
-                                    <li>Efficiently handle bulk messaging and announcements</li>
-                                    <li>Integrate seamlessly with your existing workflows</li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap justify-between  mt-5">
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-10 rounded-lg shadow-md w-full md:w-[74%] lg:w-[74%] xl:w-[74%]  mb-4 md:mb-0">
-                            <h2 class="text-xl font-semibold mb-5 dark:text-white">
-                                <i class="fas fa-user-circle mr-2"></i> About Me
-                            </h2>
-
-                            <div class="md:text-base text-sm">
-                                <div class="space-y-4 text-gray-800 dark:text-gray-200 text-justify">
-                                    <p>
-                                        Hi, I'm Yahya Muhammad, a passionate tech enthusiast with a deep curiosity for
-                                        innovation and
-                                        problem-solving.
-                                    </p>
-                                    <p>
-                                        My journey in the tech world began at a young age when I got my hands on my
-                                        first
-                                        computer.
-                                        Exploring various programming languages and building my own projects sparked my
-                                        interest in
-                                        software development.
-                                    </p>
-                                    <p>
-                                        Over the years, I've had the privilege of working with diverse teams on exciting
-                                        projects that range
-                                        from web applications to mobile apps. This journey has honed my skills in
-                                        front-end
-                                        and back-end
-                                        development, UI/UX design, and project management.
-                                    </p>
-                                    <p>
-                                        Today, I'm dedicated to creating meaningful solutions that enhance lives through
-                                        technology. I
-                                        believe in continuous learning and keeping up with the latest trends to stay at
-                                        the
-                                        forefront of the
-                                        ever-evolving tech landscape.
-                                    </p>
-                                    <p>
-                                        If you're interested in connecting or collaborating, feel free to reach out to
-                                        me on
-                                        <a href="https://www.linkedin.com/in/yahymmd/" target="_blank"
-                                            class="text-blue-500 hover:underline">LinkedIn</a>. Let's embark on this
-                                        exciting journey
-                                        together!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div
-                            class="bg-[#CBF1F5] chart-container flex flex-col justify-center items-center dark:bg-gray-700 p-4 rounded-lg shadow-md w-full md:w-1/4 lg:w-1/4 xl:w-1/4">
-                            <img draggable="false" class=" w-auto p-5" src="./assets/img/pngwing.com (2).png" alt="">
-                        </div>
+            <div
+                class="mb-10 py-32 md:px-96 px-5 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md animate-gradient">
+                <p class="flex justify-center mb-4 text-xl font-semibold">Let's answer some questions</p>
+                <div class="relative">
+                    <input type="text" placeholder="Search"
+                        class="text-black w-full px-4 py-2 pl-10 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500">
+                    <div class="absolute top-0 left-0 flex items-center h-full pl-3">
+                        <i class="fas fa-search text-gray-400"></i>
                     </div>
                 </div>
-
-
-                <footer class="dark:text-white md:mt-[19px] mt-10">
-                    <div class="container mx-auto flex justify-between">
-                        <div class="text-xs md:text-base">&copy; 2023 Killua Bot. All rights reserved.</div>
-                        <div class="text-xs md:text-base">More Information</div>
-                    </div>
-                </footer>
-
             </div>
 
-            <div class="hidden content-div container mx-auto md:mt-1 mt-16 p-4" id="myDiv">
-                <!-- Header Contact -->
-                <div class="mb-10 p-4 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold"><i class="fas fa-envelope mr-2"></i>Contact Us</h2>
-                </div>
-                <div class="flex flex-wrap justify-between">
-                    <div class="w-full md:w-1/2 space-y-4 md:pr-5">
-                        <form action="https://formspree.io/xdorgkel" method="POST">
-                            <div
-                                class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-16 mb-4">
-                                <!-- Konten kotak pertama -->
-                                <div class="flex flex-row items-center justify-start w-full">
-                                    <h2 class="flex items-center text-lg font-semibold dark:text-white mr-2 left-0">
-                                        <i class="fas fa-user mr-2"></i> Name
-                                    </h2>
-                                    <input type="text" name="name"
-                                        class="border-2 border-black dark:border-white border-opacity-50 outline-transparent p-2 rounded-md w-full bg-transparent">
-                                </div>
+            <div class="container mx-auto mt-8">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- Peraturan 1 -->
+                    <div id="peraturan1"
+                        class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold">Be respectful and kind</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
                             </div>
-                            <div
-                                class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-16 mb-4">
-                                <!-- Konten kotak kedua -->
-                                <div class="flex flex-row items-center justify-start w-full">
-                                    <h2 class="flex items-center text-lg font-semibold dark:text-white mr-3 left-0">
-                                        <i class="fas fa-envelope mr-2"></i> Email
-                                    </h2>
-                                    <input type="email" name="email"
-                                        class="border-2 border-black dark:border-white border-opacity-50 outline-transparent p-2 rounded-md w-full bg-transparent">
-                                </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Use appropriate and respectful language in all interactions.
                             </div>
-                            <div
-                                class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-auto mb-4">
-                                <!-- Konten kotak kedua -->
-                                <div class="flex md:flex-row flex-col w-full">
-                                    <div>
-                                        <div class="flex flex-row md:mr-2 md:mt-2 mb-2 ">
-                                            <h2 class="flex items-center text-lg font-semibold mr-1 dark:text-white">
-                                                <i class="far fa-comment-dots mr-2"></i> Your
-                                            </h2>
-                                            <h2 class="text-lg font-semibold dark:text-white">Message</h2>
-                                        </div>
-                                    </div>
-                                    <div class="relative w-full">
-                                        <textarea name="message"
-                                            class="border-2 border-black dark:border-white border-opacity-50 outline-transparent p-3 rounded-md w-full bg-transparent resize-vertical h-48 min-h-[192px]"></textarea>
-                                        <button type="submit"
-                                            class="absolute m-3 bottom-2 right-0 px-3 py-1 bg-blue-500 hover:scale-105 active:scale-95 text-white rounded-md text-base transition-transform duration-300">Send</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
+
+                    <!-- Peraturan 2 -->
+                    <div id="peraturan2"
+                        class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold">No spam or self-promotion</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Do not post spam or engage in self-promotion.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peraturan 3 -->
+                    <div id="peraturan3"
+                        class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold">Respect privacy and confidentiality</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Respect the privacy and confidentiality of others.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peraturan 4 -->
+                    <div id="peraturan4"
+                        class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold">Stay on topic and relevant</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Keep discussions and posts relevant to the topic.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peraturan 5 -->
+                    <div id="peraturan5"
+                        class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Use respectful language</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Always use respectful and appropriate language in your interactions.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peraturan 6 -->
+                    <div id="peraturan6"
+                        class="p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold">Respect diversity and inclusivity</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Embrace and respect diverse perspectives and promote inclusivity.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan7"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Animation Example</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open"
+                                class="cursor-pointer absolute top-0 right-0 p-3 transition-transform transform"
+                                :class="{ 'rotate-180': open }">
+                                <i class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                This section can be toggled with animation.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan8"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Triple Click Example</h2>
+                        <div x-data="{ clickCount: 0 }" @click.away="clickCount = 0">
+                            <div @click="clickCount += 1" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="clickCount < 3"
+                                    class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="clickCount >= 3"
+                                    class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="clickCount >= 3"
+                                class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                This section is toggled with a triple click.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan9"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Delayed Response</h2>
+                        <div x-data="{ open: false, delay: 1000 }" @click.away="open = false">
+                            <div @click="setTimeout(() => { open = !open }, delay)"
+                                class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                This section has a delayed response when clicked.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan10"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Custom Colors</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-indigo-600 dark:text-indigo-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-indigo-600 dark:text-indigo-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-indigo-600 dark:text-indigo-300">
+                                This section uses custom colors for icons and text.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan11"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Automatic Toggle</h2>
+                        <div x-data="{ open: false }" x-init="setTimeout(() => { open = true }, 3000)">
+                            <div class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                This section automatically toggles after 3 seconds.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan12"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> User Input Example</h2>
+                        <div x-data="{ open: false, userInput: '' }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Please enter your name: <input type="text" x-model="userInput" class="border p-1">
+                                <p x-show="userInput" class="mt-1">Hello, <span x-text="userInput"></span>!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan13"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Background Color Animation</h2>
+                        <div x-data="{ open: false, color: 'bg-blue-500' }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div :class="[color, 'p-2', 'rounded-md', 'mt-2', 'transition', 'duration-300']"
+                                x-show="open">
+                                This section has an animated background color.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan14"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Data Retrieval Error</h2>
+                        <div x-data="{ open: false, dataError: true }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-red-600 dark:text-red-300"
+                                x-if="dataError">
+                                There was an error retrieving data. Please try again later.
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300"
+                                x-if="!dataError">
+                                Data retrieved successfully.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan15"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Dropdown Example</h2>
+                        <div x-data="{ open: false, selectedOption: '' }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Select an option:
+                                <select x-model="selectedOption" class="border p-1">
+                                    <option value="">Choose...</option>
+                                    <option value="option1">Option 1</option>
+                                    <option value="option2">Option 2</option>
+                                    <option value="option3">Option 3</option>
+                                </select>
+                                <p x-show="selectedOption" class="mt-1">You selected: <span
+                                        x-text="selectedOption"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan16"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Confirmation Button</h2>
+                        <div x-data="{ open: false, confirm: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Are you sure you want to proceed?
+                                <button @click="confirm = true"
+                                    class="bg-red-500 text-white px-3 py-1 rounded-md ml-2">Yes</button>
+                                <button @click="confirm = false"
+                                    class="bg-green-500 text-white px-3 py-1 rounded-md ml-2">No</button>
+                                <p x-show="confirm" class="mt-2 text-red-500">Action confirmed!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan17"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Server Request Simulation</h2>
+                        <div x-data="{ open: false, loading: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Click the button to simulate a server request:
+                                <button @click="loading = true; setTimeout(() => { loading = false }, 2000)"
+                                    class="bg-blue-500 text-white px-3 py-1 rounded-md ml-2">
+                                    Make Request
+                                </button>
+                                <p x-show="loading" class="mt-2 text-blue-500">Request in progress...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan18"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Popular Button</h2>
+                        <div x-data="{ open: false }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                This section has a popular button design.
+                                <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg mt-2">
+                                    Click Me!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan19"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Character Counter</h2>
+                        <div x-data="{ open: false, inputText: '' }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Type something:
+                                <textarea x-model="inputText" class="border p-1 mt-1" rows="3"></textarea>
+                                <p class="mt-1"><span x-text="inputText.length"></span> characters entered.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="peraturan20"
+                        class="hidden p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <h2 class="md:text-xl text-sm font-semibold"> Custom Setting with Slider</h2>
+                        <div x-data="{ open: false, sliderValue: 50 }" @click.away="open = false">
+                            <div @click="open = !open" class="cursor-pointer absolute top-0 right-0 p-3">
+                                <i x-show="!open" class="fas fa-chevron-up text-gray-600 dark:text-gray-300"></i>
+                                <i x-show="open" class="fas fa-chevron-down text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div x-show="open" class="md:text-base text-xs mt-2 text-gray-600 dark:text-gray-300">
+                                Adjust the setting:
+                                <input type="range" x-model="sliderValue" class="mt-1" min="0" max="100" step="1">
+                                <p class="mt-1">Setting value: <span x-text="sliderValue"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="mt-5 p-4  dark:text-white ">
+                    <h2 class="text-xl text-center font-semibold">You still have a question?</h2>
+                </div>
+
+                <div class="mt-5 grid md:grid-cols-2 gap-4">
 
                     <div
-                        class="w-full md:w-1/2 bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md mb-4">
-                        <div class="flex flex-col-reverse md:flex-row items-center space-y-4 md:space-y-0 md:space-x-5">
-                            <!-- Icons Section -->
-                            <div
-                                class="flex md:flex-col items-center md:space-y-5 space-x-4 md:space-x-0 h-auto border-opacity-50 md:border-2 border-black dark:border-white md:px-20 md:py-9 rounded-xl md:mt-0 mt-7">
-                                <!-- Instagram Icon -->
-                                <a draggable="false" href="https://www.instagram.com/yahymhmmd" target="_blank"
-                                    class="flex items-center justify-center w-14 h-14 bg-blue-500 rounded-full transform transition-transform hover:scale-110 active:scale-95">
-                                    <i class="fab fa-instagram text-white text-3xl"></i>
-                                </a>
-                                <!-- WhatsApp Icon -->
-                                <a draggable="false" href="https://wa.me/+6285174430116?text=Halo%20%F0%9F%91%8B%20Ada%20yang%20bisa%20saya%20bantu%3F
-                                " target="_blank"
-                                    class="flex items-center justify-center w-14 h-14 bg-green-500 rounded-full transform transition-transform hover:scale-110 active:scale-95">
-                                    <i class="fab fa-whatsapp text-white text-3xl"></i>
-                                </a>
-                                <!-- GitHub Icon -->
-                                <a draggable="false" href="https://github.com/" target="_blank"
-                                    class="flex items-center justify-center w-14 h-14 bg-gray-800 rounded-full transform transition-transform hover:scale-110 active:scale-95">
-                                    <i class="fab fa-github text-white text-3xl"></i>
-                                </a>
-                                <!-- Figma Icon -->
-                                <a draggable="false" href="https://www.figma.com/@yahymhmmd" target="_blank"
-                                    class="flex items-center justify-center w-14 h-14 bg-purple-500 rounded-full transform transition-transform hover:scale-110 active:scale-95">
-                                    <i class="fab fa-figma text-white text-3xl"></i>
-                                </a>
-                            </div>
-                            <!-- Contact Details -->
-                            <div class="flex flex-col px-14">
-                                <p class="text-2xl  font-semibold mb-4 dark:text-white">KilluaBot Hub</p>
-                                <div class="space-y-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-phone-alt text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
-                                        <p class="text-gray-600 dark:text-gray-300 text-lg">
-                                            <a draggable="false" href="tel:+6285174430116"
-                                                class="text-blue-500 hover:underline">+62
-                                                85174430116</a>
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-envelope text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
-                                        <p class="text-gray-600 dark:text-gray-300 text-lg">
-                                            <a draggable="false" href="mailto:y4hymhmmd@gmail.com"
-                                                class="text-blue-500 hover:underline">y4hymhmmd@gmail.com</a>
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fas fa-map-marker-alt text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
-                                        <p class="text-gray-600 dark:text-gray-300 text-lg hover:underline">
-                                            Pekanbaru, <a draggable="false"
-                                                href="https://www.google.com/maps/search/?api=1&query=Pekanbaru%2C+Riau"
-                                                target="_blank" class="hover:underline">Riau</a>
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-globe text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
-                                        <p class="text-gray-600 dark:text-gray-300 text-lg">
-                                            <a draggable="false"
-                                                href="https://www.google.com/maps/search/?api=1&query=Indonesia"
-                                                target="_blank" class="hover:underline">Indonesia</a>
-                                        </p>
-                                    </div>
-                                </div>
-
-
-                                <div class="mt-12">
-                                    <h1 class="mb-3 dark:text-white flex items-center text-sm">
-                                        <i
-                                            class="fas fa-hand-holding-heart text-gray-600 dark:text-gray-300 text-sm mr-2"></i>
-                                        Support Me:
-                                    </h1>
-
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <button
-                                            class="bg-blue-500 text-white px-3 py-1.5 rounded-md hover:scale-105 active:scale-95 transition-transform">
-                                            <a draggable="false" href="https://trakteer.id/yahymhmmd" target="_blank"
-                                                class="flex items-center space-x-2">
-                                                <div
-                                                    class="bg-red-700 rounded-full p-1  flex justify-center items-center">
-                                                    <img draggable="false" src="./assets/img/trakteer.png" alt="Saweria"
-                                                        class="w-5">
-                                                </div>
-                                                <span>Trakteer</span>
-                                            </a>
-                                        </button>
-                                        <button
-                                            class="bg-green-500 text-white px-3 py-1.5 rounded-md hover:scale-105 active:scale-95 transition-transform">
-                                            <a draggable="false" href="https://saweria.co/yahymhmmd" target="_blank"
-                                                class="flex items-center space-x-2">
-                                                <div class="bg-white rounded-full p-1 flex justify-center items-center">
-                                                    <img draggable="false" src="./assets/img/saweria.png" alt="Trakteer"
-                                                        class="w-5">
-                                                </div>
-                                                <span>Saweria</span>
-                                            </a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        class="flex flex-col justify-center items-center p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <i class="fab fa-whatsapp text-4xl mb-4"></i>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            <a href="https://wa.me/+6285174430116?text=Halo%20%F0%9F%91%8B%20Ada%20yang%20bisa%20saya%20bantu%3F"
+                                target="_blank" class="text-blue-500 text-xl">+62 85174430116</a>
+                        </p>
+                        <p class="text-sm">We Are Always Happy to Help</p>
+                        <a href="https://wa.me/+6285174430116?text=Halo%20%F0%9F%91%8B%20Ada%20yang%20bisa%20saya%20bantu%3F"
+                            target="_blank" class="hidden md:block text-blue-500 hover:underline">
+                            Contact via WhatsApp
+                        </a>
                     </div>
-                </div>
-                <div class="container mt-5">
-                    <div class="flex flex-wrap justify-between">
-                        <div
-                            class="bg-gradient-to-r bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md w-full md:w-1/4 lg:w-1/4 xl:w-1/4 h-96 mb-4 md:mb-0">
-                            <!-- Bagian 1: Gambar -->
-                            <div class="w-full h-[300px] relative">
-                                <img draggable="false" src="" alt="Music Cover"
-                                    class=" w-full h-full rounded-lg shadow-md" id="coverImage"
-                                    style="object-fit: cover;">
-                            </div>
-                            <div class="relative bottom-[138px] p-2">
-                                <!-- Bagian 2: Judul Lagu, Artis, dan Icon Suka -->
-                                <div class="flex items-center justify-between mt-4">
-                                    <div>
-                                        <h3 class="text-xl font-semibold text-gray-100 " id="songTitle">Song Title</h3>
-                                        <p class="text-gray-300" id="artistName">Artist Name</p>
-                                    </div>
-                                    <button class="text-gray-500 hover:text-gray-600">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </div>
-                                <!-- Bagian 3: Garis Bar Music dan Durasi Lagu -->
-                                <div class="relative w-full bg-gray-300 h-2 rounded-full mt-4">
-                                    <div class="progress-container absolute h-full bg-blue-500 rounded-full"
-                                        style="width: 0;" id="progressBar">
-                                        <div class="absolute h-2 w-2 bg-blue-500 rounded-full" id="progressDot"></div>
-                                    </div>
-                                    <input type="range" class="progress-bar bg-blue-500 rounded-full" min="0" max="100"
-                                        step="0.1" value="0" id="seekBar">
-                                </div>
-                                <div class="flex justify-between mt-2">
-                                    <p class="text-xs text-gray-500 current-time">0:00</p>
-                                    <p class="text-xs text-gray-500 total-time">0:00</p>
-                                </div>
-                                <!-- Bagian 4: Tombol Kontrol -->
-                                <div class="flex items-center justify-between mt-6">
-                                    <button class="text-gray-500 hover:text-gray-600" id="shuffleButton">
-                                        <i class="fas fa-random"></i>
-                                    </button>
 
-                                    <button class="text-gray-500 hover:text-gray-600">
-                                        <i class="fas fa-backward"></i>
-                                    </button>
-                                    <button class="text-white bg-blue-500 hover:bg-blue-600 rounded-full p-3 h-12 w-12">
-                                        <i class="fas fa-play text-2xl"></i>
-                                    </button>
-                                    <button class="text-gray-500 hover:text-gray-600">
-                                        <i class="fas fa-forward"></i>
-                                    </button>
-                                    <button class="text-gray-500 hover:text-gray-600">
-                                        <i class="fas fa-redo-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div id="map-container"
-                            class="bg-[#CBF1F5] w-full dark:bg-gray-700 rounded-lg shadow-md md:w-[74%] lg:w-[74%] xl:w-[74%] h-96">
-                            <div id="map" class="ol-unselectable ol-viewport" style="width: 100%; height: 100%; border-radius: 8px;"></div>
-                        </div>
+                    <div
+                        class="flex flex-col justify-center items-center p-3 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md relative">
+                        <i class="fas fa-envelope text-4xl mb-4"></i>
+                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                            <a href="mailto:y4hymhmmd@gmail.com" class="text-blue-500 text-xl">y4hymhmmd@gmail.com</a>
+                        </p>
+                        <p class="text-sm">Best way to get answer faster</p>
+                        <a href="mailto:y4hymhmmd@gmail.com" class="hidden md:block text-blue-500 hover:underline">
+                            Contact via Email
+                        </a>
                     </div>
+
                 </div>
 
                 <footer class="dark:text-white md:mt-[15px] mt-10">
@@ -935,741 +577,1105 @@
                 </footer>
             </div>
 
-            <style>
-                #map-container {
-                    border-radius: 10px;
-                    overflow: hidden;
-                }
-            </style>
-            <script>
-                var map = new ol.Map({
-                    target: 'map',
-                    layers: [
-                        new ol.layer.Tile({
-                            source: new ol.source.OSM()
-                        })
-                    ],
-                    view: new ol.View({
-                        center: ol.proj.fromLonLat([101.447779, 0.507068]), // Koordinat Pekanbaru
-                        zoom: 13 // Level zoom
+
+        </div>
+
+        <div class="hidden content-div container mx-auto md:mt-1 mt-16 p-4" id="myDiv">
+            <!-- Header About -->
+            <div class="mb-10 p-4 dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
+                <h2 class=" text-xl font-semibold"><i class="fas fa-info-circle mr-2"></i>About</h2>
+            </div>
+            <div class="container mt-5">
+                <div class="flex flex-wrap justify-between">
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full md:w-1/4 lg:w-1/4 xl:w-1/4 mb-4 md:mb-0">
+                        <img draggable="false" class="floating w-auto p-5"
+                            src="./assets/img/Hunter X Hunter Killua Zoldyck Sticker.png" alt="">
+                    </div>
+
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-10 rounded-lg shadow-md  md:w-[74%] lg:w-[74%] xl:w-[74%]">
+                        <h2 class="text-xl font-semibold mb-5 dark:text-white">
+                            <i class="fas fa-robot mr-2"></i> About Killua Bot
+                        </h2>
+
+
+                        <div class="space-y-4 md:text-base text-sm text-justify">
+                            <p class="text-gray-800 dark:text-gray-200 ">
+                                Welcome to Killua Bot, your ultimate WhatsApp assistant designed to simplify your
+                                interactions
+                                and enhance your experience on the platform. Whether you're a business owner, a
+                                customer
+                                support professional, or an individual looking for a convenient way to manage tasks,
+                                Killua
+                                Bot is here to make your life easier.
+                            </p>
+
+                            <p class="text-gray-800 dark:text-gray-200">
+                                At Killua Bot, our mission is to empower you with advanced automation and
+                                intelligent
+                                responses on WhatsApp. We're committed to helping you save time, improve
+                                communication,
+                                and
+                                optimize your interactions with ease.
+                            </p>
+
+                            <p class="text-gray-800 dark:text-gray-200">
+                                Experience the future of efficient communication and task management with Killua
+                                Bot.
+                                Revolutionize the way you engage with customers, clients, and friends on WhatsApp.
+                                Contact
+                                us today to learn more about how Killua Bot can elevate your WhatsApp experience.
+                            </p>
+
+                            <p class="text-gray-800 dark:text-gray-200 cursor-pointer" onclick="toggleFeatures()">
+                                Key Features <i id="featureToggleIcon" class="fas fa-chevron-down"></i>
+                            </p>
+
+                            <ul id="featuresList" class="list-disc ml-6 space-y-2 hidden dark:text-white">
+                                <li>Simplify customer interactions with automated responses</li>
+                                <li>Streamline task management with intelligent reminders</li>
+                                <li>Enhance communication with customizable templates</li>
+                                <li>Provide instant customer support with 24/7 availability</li>
+                                <li>Efficiently handle bulk messaging and announcements</li>
+                                <li>Integrate seamlessly with your existing workflows</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-between  mt-5">
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-10 rounded-lg shadow-md w-full md:w-[74%] lg:w-[74%] xl:w-[74%]  mb-4 md:mb-0">
+                        <h2 class="text-xl font-semibold mb-5 dark:text-white">
+                            <i class="fas fa-user-circle mr-2"></i> About Me
+                        </h2>
+
+                        <div class="md:text-base text-sm">
+                            <div class="space-y-4 text-gray-800 dark:text-gray-200 text-justify">
+                                <p>
+                                    Hi, I'm Yahya Muhammad, a passionate tech enthusiast with a deep curiosity for
+                                    innovation and
+                                    problem-solving.
+                                </p>
+                                <p>
+                                    My journey in the tech world began at a young age when I got my hands on my
+                                    first
+                                    computer.
+                                    Exploring various programming languages and building my own projects sparked my
+                                    interest in
+                                    software development.
+                                </p>
+                                <p>
+                                    Over the years, I've had the privilege of working with diverse teams on exciting
+                                    projects that range
+                                    from web applications to mobile apps. This journey has honed my skills in
+                                    front-end
+                                    and back-end
+                                    development, UI/UX design, and project management.
+                                </p>
+                                <p>
+                                    Today, I'm dedicated to creating meaningful solutions that enhance lives through
+                                    technology. I
+                                    believe in continuous learning and keeping up with the latest trends to stay at
+                                    the
+                                    forefront of the
+                                    ever-evolving tech landscape.
+                                </p>
+                                <p>
+                                    If you're interested in connecting or collaborating, feel free to reach out to
+                                    me on
+                                    <a href="https://www.linkedin.com/in/yahymmd/" target="_blank"
+                                        class="text-blue-500 hover:underline">LinkedIn</a>. Let's embark on this
+                                    exciting journey
+                                    together!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div
+                        class="bg-[#CBF1F5] chart-container flex flex-col justify-center items-center dark:bg-gray-700 p-4 rounded-lg shadow-md w-full md:w-1/4 lg:w-1/4 xl:w-1/4">
+                        <img draggable="false" class=" w-auto p-5" src="./assets/img/pngwing.com (2).png" alt="">
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="dark:text-white md:mt-[19px] mt-10">
+                <div class="container mx-auto flex justify-between">
+                    <div class="text-xs md:text-base">&copy; 2023 Killua Bot. All rights reserved.</div>
+                    <div class="text-xs md:text-base">More Information</div>
+                </div>
+            </footer>
+
+        </div>
+
+        <div class="hidden content-div container mx-auto md:mt-1 mt-16 p-4" id="myDiv">
+            <!-- Header Contact -->
+            <div class="mb-10 p-4 bg-[#CBF1F5] dark:bg-gray-700 dark:text-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold"><i class="fas fa-envelope mr-2"></i>Contact Us</h2>
+            </div>
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/2 space-y-4 md:pr-5">
+                    <form action="https://formspree.io/xdorgkel" method="POST">
+                        <div
+                            class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-16 mb-4">
+                            <!-- Konten kotak pertama -->
+                            <div class="flex flex-row items-center justify-start w-full">
+                                <h2 class="flex items-center text-lg font-semibold dark:text-white mr-2 left-0">
+                                    <i class="fas fa-user mr-2"></i> Name
+                                </h2>
+                                <input type="text" name="name"
+                                    class="border-2 border-black dark:border-white border-opacity-50 outline-transparent p-2 rounded-md w-full bg-transparent">
+                            </div>
+                        </div>
+                        <div
+                            class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-16 mb-4">
+                            <!-- Konten kotak kedua -->
+                            <div class="flex flex-row items-center justify-start w-full">
+                                <h2 class="flex items-center text-lg font-semibold dark:text-white mr-3 left-0">
+                                    <i class="fas fa-envelope mr-2"></i> Email
+                                </h2>
+                                <input type="email" name="email"
+                                    class="border-2 border-black dark:border-white border-opacity-50 outline-transparent p-2 rounded-md w-full bg-transparent">
+                            </div>
+                        </div>
+                        <div
+                            class="bg-[#CBF1F5] chart-container flex justify-center items-center flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md w-full h-auto mb-4">
+                            <!-- Konten kotak kedua -->
+                            <div class="flex md:flex-row flex-col w-full">
+                                <div>
+                                    <div class="flex flex-row md:mr-2 md:mt-2 mb-2 ">
+                                        <h2 class="flex items-center text-lg font-semibold mr-1 dark:text-white">
+                                            <i class="far fa-comment-dots mr-2"></i> Your
+                                        </h2>
+                                        <h2 class="text-lg font-semibold dark:text-white">Message</h2>
+                                    </div>
+                                </div>
+                                <div class="relative w-full">
+                                    <textarea name="message"
+                                        class="border-2 border-black dark:border-white border-opacity-50 outline-transparent p-3 rounded-md w-full bg-transparent resize-vertical h-48 min-h-[192px]"></textarea>
+                                    <button type="submit"
+                                        class="absolute m-3 bottom-2 right-0 px-3 py-1 bg-blue-500 hover:scale-105 active:scale-95 text-white rounded-md text-base transition-transform duration-300">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div
+                    class="w-full md:w-1/2 bg-[#CBF1F5] chart-container flex flex-col dark:bg-gray-700 p-4 rounded-lg shadow-md mb-4">
+                    <div class="flex flex-col-reverse md:flex-row items-center space-y-4 md:space-y-0 md:space-x-5">
+                        <!-- Icons Section -->
+                        <div
+                            class="flex md:flex-col items-center md:space-y-5 space-x-4 md:space-x-0 h-auto border-opacity-50 md:border-2 border-black dark:border-white md:px-20 md:py-9 rounded-xl md:mt-0 mt-7">
+                            <!-- Instagram Icon -->
+                            <a draggable="false" href="https://www.instagram.com/yahymhmmd" target="_blank"
+                                class="flex items-center justify-center w-14 h-14 bg-blue-500 rounded-full transform transition-transform hover:scale-110 active:scale-95">
+                                <i class="fab fa-instagram text-white text-3xl"></i>
+                            </a>
+                            <!-- WhatsApp Icon -->
+                            <a draggable="false" href="https://wa.me/+6285174430116?text=Halo%20%F0%9F%91%8B%20Ada%20yang%20bisa%20saya%20bantu%3F
+                                " target="_blank"
+                                class="flex items-center justify-center w-14 h-14 bg-green-500 rounded-full transform transition-transform hover:scale-110 active:scale-95">
+                                <i class="fab fa-whatsapp text-white text-3xl"></i>
+                            </a>
+                            <!-- GitHub Icon -->
+                            <a draggable="false" href="https://github.com/" target="_blank"
+                                class="flex items-center justify-center w-14 h-14 bg-gray-800 rounded-full transform transition-transform hover:scale-110 active:scale-95">
+                                <i class="fab fa-github text-white text-3xl"></i>
+                            </a>
+                            <!-- Figma Icon -->
+                            <a draggable="false" href="https://www.figma.com/@yahymhmmd" target="_blank"
+                                class="flex items-center justify-center w-14 h-14 bg-purple-500 rounded-full transform transition-transform hover:scale-110 active:scale-95">
+                                <i class="fab fa-figma text-white text-3xl"></i>
+                            </a>
+                        </div>
+                        <!-- Contact Details -->
+                        <div class="flex flex-col px-14">
+                            <p class="text-2xl  font-semibold mb-4 dark:text-white">KilluaBot Hub</p>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone-alt text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
+                                    <p class="text-gray-600 dark:text-gray-300 text-lg">
+                                        <a draggable="false" href="tel:+6285174430116"
+                                            class="text-blue-500 hover:underline">+62
+                                            85174430116</a>
+                                    </p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
+                                    <p class="text-gray-600 dark:text-gray-300 text-lg">
+                                        <a draggable="false" href="mailto:y4hymhmmd@gmail.com"
+                                            class="text-blue-500 hover:underline">y4hymhmmd@gmail.com</a>
+                                    </p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
+                                    <p class="text-gray-600 dark:text-gray-300 text-lg hover:underline">
+                                        Pekanbaru, <a draggable="false"
+                                            href="https://www.google.com/maps/search/?api=1&query=Pekanbaru%2C+Riau"
+                                            target="_blank" class="hover:underline">Riau</a>
+                                    </p>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-globe text-gray-600 dark:text-gray-300 text-lg mr-3"></i>
+                                    <p class="text-gray-600 dark:text-gray-300 text-lg">
+                                        <a draggable="false"
+                                            href="https://www.google.com/maps/search/?api=1&query=Indonesia"
+                                            target="_blank" class="hover:underline">Indonesia</a>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="mt-12">
+                                <h1 class="mb-3 dark:text-white flex items-center text-sm">
+                                    <i
+                                        class="fas fa-hand-holding-heart text-gray-600 dark:text-gray-300 text-sm mr-2"></i>
+                                    Support Me:
+                                </h1>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <button
+                                        class="bg-blue-500 text-white px-3 py-1.5 rounded-md hover:scale-105 active:scale-95 transition-transform">
+                                        <a draggable="false" href="https://trakteer.id/yahymhmmd" target="_blank"
+                                            class="flex items-center space-x-2">
+                                            <div class="bg-red-700 rounded-full p-1  flex justify-center items-center">
+                                                <img draggable="false" src="./assets/img/trakteer.png" alt="Saweria"
+                                                    class="w-5">
+                                            </div>
+                                            <span>Trakteer</span>
+                                        </a>
+                                    </button>
+                                    <button
+                                        class="bg-green-500 text-white px-3 py-1.5 rounded-md hover:scale-105 active:scale-95 transition-transform">
+                                        <a draggable="false" href="https://saweria.co/yahymhmmd" target="_blank"
+                                            class="flex items-center space-x-2">
+                                            <div class="bg-white rounded-full p-1 flex justify-center items-center">
+                                                <img draggable="false" src="./assets/img/saweria.png" alt="Trakteer"
+                                                    class="w-5">
+                                            </div>
+                                            <span>Saweria</span>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="flex flex-wrap justify-between">
+                    <div
+                        class="bg-gradient-to-r bg-[#CBF1F5] dark:bg-gray-700 p-4 rounded-lg shadow-md w-full md:w-1/4 lg:w-1/4 xl:w-1/4 h-96 mb-4 md:mb-0">
+                        <!-- Bagian 1: Gambar -->
+                        <div class="w-full h-[300px] relative">
+                            <img draggable="false" src="" alt="Music Cover" class=" w-full h-full rounded-lg shadow-md"
+                                id="coverImage" style="object-fit: cover;">
+                        </div>
+                        <div class="relative bottom-[138px] p-2">
+                            <!-- Bagian 2: Judul Lagu, Artis, dan Icon Suka -->
+                            <div class="flex items-center justify-between mt-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-gray-100 " id="songTitle">Song Title</h3>
+                                    <p class="text-gray-300" id="artistName">Artist Name</p>
+                                </div>
+                                <button class="text-gray-500 hover:text-gray-600">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            <!-- Bagian 3: Garis Bar Music dan Durasi Lagu -->
+                            <div class="relative w-full bg-gray-300 h-2 rounded-full mt-4">
+                                <div class="progress-container absolute h-full bg-blue-500 rounded-full"
+                                    style="width: 0;" id="progressBar">
+                                    <div class="absolute h-2 w-2 bg-blue-500 rounded-full" id="progressDot"></div>
+                                </div>
+                                <input type="range" class="progress-bar bg-blue-500 rounded-full" min="0" max="100"
+                                    step="0.1" value="0" id="seekBar">
+                            </div>
+                            <div class="flex justify-between mt-2">
+                                <p class="text-xs text-gray-500 current-time">0:00</p>
+                                <p class="text-xs text-gray-500 total-time">0:00</p>
+                            </div>
+                            <!-- Bagian 4: Tombol Kontrol -->
+                            <div class="flex items-center justify-between mt-6">
+                                <button class="text-gray-500 hover:text-gray-600" id="shuffleButton">
+                                    <i class="fas fa-random"></i>
+                                </button>
+
+                                <button class="text-gray-500 hover:text-gray-600">
+                                    <i class="fas fa-backward"></i>
+                                </button>
+                                <button class="text-white bg-blue-500 hover:bg-blue-600 rounded-full p-3 h-12 w-12">
+                                    <i class="fas fa-play text-2xl"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-600">
+                                    <i class="fas fa-forward"></i>
+                                </button>
+                                <button class="text-gray-500 hover:text-gray-600">
+                                    <i class="fas fa-redo-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="map-container"
+                        class="bg-[#CBF1F5] w-full dark:bg-gray-700 rounded-lg shadow-md md:w-[74%] lg:w-[74%] xl:w-[74%] h-96">
+                        <div id="map" class="ol-unselectable ol-viewport"
+                            style="width: 100%; height: 100%; border-radius: 8px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="dark:text-white md:mt-[15px] mt-10">
+                <div class="container mx-auto flex justify-between">
+                    <div class="text-xs md:text-base">&copy; 2023 Killua Bot. All rights reserved.</div>
+                    <div class="text-xs md:text-base">More Information</div>
+                </div>
+            </footer>
+        </div>
+
+        <style>
+            #map-container {
+                border-radius: 10px;
+                overflow: hidden;
+            }
+        </style>
+        <script>
+            var map = new ol.Map({
+                target: 'map',
+                layers: [
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM()
                     })
-                });
+                ],
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([101.447779, 0.507068]), // Koordinat Pekanbaru
+                    zoom: 13 // Level zoom
+                })
+            });
 
-                var marker = new ol.Feature({
-                    geometry: new ol.geom.Point(ol.proj.fromLonLat([101.447779, 0.507068])) // Koordinat Pekanbaru
-                });
+            var marker = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.fromLonLat([101.447779, 0.507068])) // Koordinat Pekanbaru
+            });
 
-                var vectorSource = new ol.source.Vector({
-                    features: [marker]
-                });
+            var vectorSource = new ol.source.Vector({
+                features: [marker]
+            });
 
-                var vectorLayer = new ol.layer.Vector({
-                    source: vectorSource
-                });
+            var vectorLayer = new ol.layer.Vector({
+                source: vectorSource
+            });
 
-                map.addLayer(vectorLayer);
-            </script>
+            map.addLayer(vectorLayer);
+        </script>
 
-            <script>
-                const barChartCtx = document.getElementById('barChart').getContext('2d');
+        <script>
+            const barChartCtx = document.getElementById('barChart').getContext('2d');
 
-                const barChartOptions = {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            ticks: {
-                                callback: function (value, index, values) {
-                                    return value;
-                                }
+            const barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function (value, index, values) {
+                                return value;
                             }
-                        },
-                        y: {
-                            beginAtZero: true
                         }
+                    },
+                    y: {
+                        beginAtZero: true
                     }
-                };
-
-                const dataByMonth = {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    datasets: [
-                        {
-                            label: 'Sales',
-                            data: [120, 190, 130, 180, 220, 150, 170, 200, 250, 280, 210, 240],
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Customer Growth',
-                            data: [8, 15, 10, 12, 7, 5, 9, 11, 6, 13, 14, 20],
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Commands Executed',
-                            data: [5, 7, 3, 8, 6, 4, 9, 10, 8, 6, 7, 12],
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                };
-
-                const dataByWeek = {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                    datasets: [
-                        {
-                            label: 'Sales',
-                            data: [50, 70, 60, 80],
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Customer Growth',
-                            data: [5, 7, 6, 8],
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Commands Executed',
-                            data: [3, 4, 5, 2],
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                };
-
-                const dataByDay = {
-                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                    datasets: [
-                        {
-                            label: 'Sales',
-                            data: [10, 15, 20, 18, 25, 30, 28],
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Customer Growth',
-                            data: [2, 3, 4, 5, 6, 7, 8],
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Commands Executed',
-                            data: [1, 3, 2, 4, 1, 2, 3],
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                };
-
-
-                let currentData = dataByMonth;
-                let currentIndex = 0;
-                const dataOptions = [dataByMonth, dataByWeek, dataByDay];
-
-                function generateRandomData() {
-                    const newData = currentData.datasets[0].data.map(value => value + Math.floor(Math.random() * 10));
-                    return newData;
                 }
+            };
 
-                setInterval(() => {
-                    currentData.datasets[0].data = generateRandomData();
-                    barChart.update();
-                }, 30000);
-
-                const barChart = new Chart(barChartCtx, {
-                    type: 'bar',
-                    data: currentData,
-                    options: barChartOptions
-                });
-
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % dataOptions.length;
-                    currentData = dataOptions[currentIndex];
-                    barChart.data = currentData;
-                    barChart.update();
-                }, 10000);
-
-
-                const doughnutChartCtx = document.getElementById('doughnutChart').getContext('2d');
-                const initialData = [300, 50, 100];
-                const doughnutChartData = {
-                    datasets: [{
-                        data: initialData,
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(255, 99, 132, 0.4)',
-                            'rgba(54, 162, 235, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)'
-                        ],
-                        borderWidth: 1
-                    }],
-                    labels: ['Sales', 'Customer Growth', 'Commands Executed']
-                };
-
-                const doughnutChartOptions = {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                };
-
-                const doughnutChart = new Chart(doughnutChartCtx, {
-                    type: 'doughnut',
-                    data: doughnutChartData,
-                    options: doughnutChartOptions
-                });
-
-                function updateData() {
-                    const newData = initialData.map(value => value + Math.floor(Math.random() * 10));
-                    doughnutChart.data.datasets[0].data = newData;
-                    doughnutChart.update();
-                }
-
-                setInterval(updateData, 1000);
-
-                const activeUsersChartCtx = document.getElementById('activeUsersChart').getContext('2d');
-                const activeUsersData = {
-                    labels: [],
-                    datasets: [{
-                        label: 'Active Users',
-                        data: [],
+            const dataByMonth = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Sales',
+                        data: [120, 190, 130, 180, 220, 150, 170, 200, 250, 280, 210, 240],
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
-                    }]
-                };
-                const activeUsersChart = new Chart(activeUsersChartCtx, {
-                    type: 'bar',
-                    data: activeUsersData,
-                    options: {
-                        plugins: {
-                            legend: {
-                                display: false,
-                            },
-                        },
-                        scales: {
-                            x: {
-                                ticks: {
-                                    callback: function (value, index, values) {
-                                        return value;
-                                    },
-                                },
-                            },
-                            y: {
-                                beginAtZero: true,
-                            },
+                    },
+                    {
+                        label: 'Customer Growth',
+                        data: [8, 15, 10, 12, 7, 5, 9, 11, 6, 13, 14, 20],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Commands Executed',
+                        data: [5, 7, 3, 8, 6, 4, 9, 10, 8, 6, 7, 12],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            const dataByWeek = {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [
+                    {
+                        label: 'Sales',
+                        data: [50, 70, 60, 80],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Customer Growth',
+                        data: [5, 7, 6, 8],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Commands Executed',
+                        data: [3, 4, 5, 2],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            const dataByDay = {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [
+                    {
+                        label: 'Sales',
+                        data: [10, 15, 20, 18, 25, 30, 28],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Customer Growth',
+                        data: [2, 3, 4, 5, 6, 7, 8],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Commands Executed',
+                        data: [1, 3, 2, 4, 1, 2, 3],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+
+            let currentData = dataByMonth;
+            let currentIndex = 0;
+            const dataOptions = [dataByMonth, dataByWeek, dataByDay];
+
+            function generateRandomData() {
+                const newData = currentData.datasets[0].data.map(value => value + Math.floor(Math.random() * 10));
+                return newData;
+            }
+
+            setInterval(() => {
+                currentData.datasets[0].data = generateRandomData();
+                barChart.update();
+            }, 30000);
+
+            const barChart = new Chart(barChartCtx, {
+                type: 'bar',
+                data: currentData,
+                options: barChartOptions
+            });
+
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % dataOptions.length;
+                currentData = dataOptions[currentIndex];
+                barChart.data = currentData;
+                barChart.update();
+            }, 10000);
+
+
+            const doughnutChartCtx = document.getElementById('doughnutChart').getContext('2d');
+            const initialData = [300, 50, 100];
+            const doughnutChartData = {
+                datasets: [{
+                    data: initialData,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(54, 162, 235, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }],
+                labels: ['Sales', 'Customer Growth', 'Commands Executed']
+            };
+
+            const doughnutChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            };
+
+            const doughnutChart = new Chart(doughnutChartCtx, {
+                type: 'doughnut',
+                data: doughnutChartData,
+                options: doughnutChartOptions
+            });
+
+            function updateData() {
+                const newData = initialData.map(value => value + Math.floor(Math.random() * 10));
+                doughnutChart.data.datasets[0].data = newData;
+                doughnutChart.update();
+            }
+
+            setInterval(updateData, 1000);
+
+            const activeUsersChartCtx = document.getElementById('activeUsersChart').getContext('2d');
+            const activeUsersData = {
+                labels: [],
+                datasets: [{
+                    label: 'Active Users',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+            const activeUsersChart = new Chart(activeUsersChartCtx, {
+                type: 'bar',
+                data: activeUsersData,
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false,
                         },
                     },
-                });
-
-
-                function updateActiveUsersChart() {
-                    const maxDataPoints = 10;
-                    if (activeUsersData.labels.length >= maxDataPoints) {
-                        activeUsersData.labels.shift();
-                        activeUsersData.datasets[0].data.shift();
-                    }
-
-                    const currentTimestamp = new Date().toLocaleTimeString();
-                    const activeUsers = Math.floor(Math.random() * 100);
-                    activeUsersData.labels.push(currentTimestamp);
-                    activeUsersData.datasets[0].data.push(activeUsers);
-
-                    activeUsersChart.update();
-                    setTimeout(updateActiveUsersChart, 1000);
-                }
-
-                const initialActiveUsers = Math.floor(Math.random() * 100);
-                document.addEventListener('DOMContentLoaded', () => {
-                    updateActiveUsersChart();
-                    Alpine.data('activeUsers', () => ({ activeUsers: initialActiveUsers }));
-                });
-
-
-                const lineChartCtx = document.getElementById('lineChart').getContext('2d');
-
-                const realTimeData = {
-                    labels: [],
-                    datasets: [
-                        {
-                            label: 'Online Users',
-                            data: [],
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Received Messages',
-                            data: [],
-                            borderColor: 'rgba(255, 205, 86, 1)',
-                            borderWidth: 1,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Server Uptime',
-                            data: [],
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
-                            fill: false,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Commands Executed',
-                            data: [],
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            fill: false,
-                            tension: 0.4
-                        }
-                    ]
-                };
-
-                const lineChartOptions = {
-                    maintainAspectRatio: false,
-                    responsive: true,
                     scales: {
                         x: {
                             ticks: {
                                 callback: function (value, index, values) {
                                     return value;
-                                }
-                            }
+                                },
+                            },
                         },
                         y: {
-                            beginAtZero: true
-                        }
-                    }
-                };
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
 
-                const lineChart = new Chart(lineChartCtx, {
-                    type: 'line',
-                    data: realTimeData,
-                    options: lineChartOptions
-                });
 
-                function updateRealTimeChart() {
-                    const maxDataPoints = 10;
-                    if (realTimeData.labels.length >= maxDataPoints) {
-                        realTimeData.labels.shift();
-                        realTimeData.datasets.forEach(dataset => {
-                            dataset.data.shift();
-                        });
-                    }
-
-                    const currentTimestamp = new Date().toLocaleTimeString();
-                    const onlineUsers = Math.floor(Math.random() * 100);
-                    const receivedMessages = Math.floor(Math.random() * 50);
-                    const serverUptime = Math.floor(Math.random() * 100);
-                    const commandsExecuted = Math.floor(Math.random() * 10);
-                    realTimeData.labels.push(currentTimestamp);
-                    realTimeData.datasets[0].data.push(onlineUsers);
-                    realTimeData.datasets[1].data.push(receivedMessages);
-                    realTimeData.datasets[2].data.push(serverUptime);
-                    realTimeData.datasets[3].data.push(commandsExecuted);
-
-                    lineChart.update();
-                    setTimeout(updateRealTimeChart, 1000);
+            function updateActiveUsersChart() {
+                const maxDataPoints = 10;
+                if (activeUsersData.labels.length >= maxDataPoints) {
+                    activeUsersData.labels.shift();
+                    activeUsersData.datasets[0].data.shift();
                 }
 
-                document.addEventListener('DOMContentLoaded', () => {
-                    updateRealTimeChart();
-                });
-            </script>
+                const currentTimestamp = new Date().toLocaleTimeString();
+                const activeUsers = Math.floor(Math.random() * 100);
+                activeUsersData.labels.push(currentTimestamp);
+                activeUsersData.datasets[0].data.push(activeUsers);
 
-            <script>
-                const darkModeToggle = document.getElementById('dark-mode-toggle');
-                const body = document.body;
+                activeUsersChart.update();
+                setTimeout(updateActiveUsersChart, 1000);
+            }
 
-                const isDarkMode = JSON.parse(localStorage.getItem('darkMode'));
+            const initialActiveUsers = Math.floor(Math.random() * 100);
+            document.addEventListener('DOMContentLoaded', () => {
+                updateActiveUsersChart();
+                Alpine.data('activeUsers', () => ({ activeUsers: initialActiveUsers }));
+            });
 
-                if (isDarkMode) {
-                    body.classList.add('dark');
-                    darkModeToggle.checked = true;
-                }
 
-                darkModeToggle.addEventListener('change', () => {
-                    if (darkModeToggle.checked) {
-                        body.classList.add('dark');
-                        localStorage.setItem('darkMode', true);
-                    } else {
-                        body.classList.remove('dark');
-                        localStorage.setItem('darkMode', false);
+            const lineChartCtx = document.getElementById('lineChart').getContext('2d');
+
+            const realTimeData = {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Online Users',
+                        data: [],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Received Messages',
+                        data: [],
+                        borderColor: 'rgba(255, 205, 86, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Server Uptime',
+                        data: [],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Commands Executed',
+                        data: [],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.4
                     }
-                });
+                ]
+            };
 
-                const audioList = [
-                    {
-                        "audioFile": "_____.mp3",
-                        "imageFile": "_____.png",
-                        "title": "夜に駆ける",
-                        "artist": "YOASOBI"
-                    },
-                    {
-                        "audioFile": "Blinding_Lights.mp3",
-                        "imageFile": "Blinding_Lights.png",
-                        "title": "Blinding Lights",
-                        "artist": "The Weeknd"
-                    },
-                    {
-                        "audioFile": "rockstar__feat__21_Savage_.mp3",
-                        "imageFile": "rockstar__feat__21_Savage_.png",
-                        "title": "Rockstar (feat. 21 Savage)",
-                        "artist": "Post Malone"
-                    },
-                    {
-                        "audioFile": "Shape_of_You.mp3",
-                        "imageFile": "Shape_of_You.png",
-                        "title": "Shape of You",
-                        "artist": "Ed Sheeran"
-                    },
-                    {
-                        "audioFile": "Shinunoga_E-Wa.mp3",
-                        "imageFile": "Shinunoga_E-Wa.png",
-                        "title": "Shinunoga E-Wa",
-                        "artist": "Fujii Kaze"
-                    },
-                    {
-                        "audioFile": "Starboy.mp3",
-                        "imageFile": "Starboy.png",
-                        "title": "Starboy",
-                        "artist": "The Weeknd"
-                    },
-                    {
-                        "audioFile": "Sunflower_-_Spider-Man__Into_the_Spider-Verse.mp3",
-                        "imageFile": "Sunflower_-_Spider-Man__Into_the_Spider-Verse.png",
-                        "title": "Sunflower",
-                        "artist": "Post Malone"
-                    }
-                ];
-
-
-                let currentSongIndex = 0;
-                let isPlaying = false;
-                let isRepeating = false;
-                let isShuffling = false;
-                let isLiked = false;
-                let shuffledSongIndices = shuffleIndices(audioList.length);
-
-                const audio = new Audio(`./assets/audio/${audioList[currentSongIndex].audioFile}`);
-
-                const playPauseButton = document.querySelector(".fa-play");
-                const prevButton = document.querySelector(".fa-backward");
-                const nextButton = document.querySelector(".fa-forward");
-                const shuffleButton = document.querySelector(".fa-random");
-                const seekBar = document.querySelector("input[type='range']");
-                const currentTimeElement = document.querySelector(".current-time");
-                const totalTimeElement = document.querySelector(".total-time");
-                const repeatButton = document.querySelector(".fa-redo-alt");
-                const heartIcon = document.querySelector(".fa-heart");
-
-                let prevClickTime = 0;
-
-                playPauseButton.addEventListener("click", togglePlayPause);
-                prevButton.addEventListener("click", playPreviousSong);
-                nextButton.addEventListener("click", playNextSong);
-                repeatButton.addEventListener("click", toggleRepeat);
-                shuffleButton.addEventListener("click", toggleShuffle);
-                heartIcon.addEventListener("click", toggleLike);
-                seekBar.addEventListener("input", seekAudio);
-                audio.addEventListener("timeupdate", updateProgressBar);
-                audio.addEventListener("ended", playNextSong);
-
-                loadPlayerData();
-                updateUI();
-
-                function togglePlayPause() {
-                    if (isPlaying) {
-                        audio.pause();
-                    } else {
-                        audio.play();
-                    }
-                    isPlaying = !isPlaying;
-                    updatePlayPauseIcon();
-                    savePlayerData();
-                }
-
-                function playPreviousSong() {
-                    const currentTime = new Date().getTime();
-                    if (currentTime - prevClickTime < 300) {
-                        const skipAmount = 10;
-                        audio.currentTime = Math.max(audio.currentTime - skipAmount, 0);
-                    } else {
-                        prevClickTime = currentTime;
-                        currentSongIndex = (currentSongIndex - 1 + audioList.length) % audioList.length;
-                        playCurrentSong();
-                        savePlayerData();
-                    }
-                }
-
-                function playNextSong() {
-                    const currentTime = new Date().getTime();
-                    if (currentTime - prevClickTime < 300) {
-                        const skipAmount = 10;
-                        audio.currentTime = Math.min(audio.currentTime + skipAmount, audio.duration);
-                    } else {
-                        prevClickTime = currentTime;
-                        if (isShuffling) {
-                            currentSongIndex = shuffledSongIndices.shift();
-                            if (shuffledSongIndices.length === 0) {
-                                shuffledSongIndices = shuffleIndices(audioList.length);
+            const lineChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function (value, index, values) {
+                                return value;
                             }
-                        } else {
-                            currentSongIndex = (currentSongIndex + 1) % audioList.length;
                         }
-                        playCurrentSong();
-                        savePlayerData();
+                    },
+                    y: {
+                        beginAtZero: true
                     }
                 }
+            };
 
-                function playCurrentSong() {
-                    audio.src = `./assets/audio/${audioList[currentSongIndex].audioFile}`;
-                    coverImage.src = `./public/img/${audioList[currentSongIndex].imageFile}`;
-                    songTitle.textContent = audioList[currentSongIndex].title;
-                    artistName.textContent = audioList[currentSongIndex].artist;
+            const lineChart = new Chart(lineChartCtx, {
+                type: 'line',
+                data: realTimeData,
+                options: lineChartOptions
+            });
+
+            function updateRealTimeChart() {
+                const maxDataPoints = 10;
+                if (realTimeData.labels.length >= maxDataPoints) {
+                    realTimeData.labels.shift();
+                    realTimeData.datasets.forEach(dataset => {
+                        dataset.data.shift();
+                    });
+                }
+
+                const currentTimestamp = new Date().toLocaleTimeString();
+                const onlineUsers = Math.floor(Math.random() * 100);
+                const receivedMessages = Math.floor(Math.random() * 50);
+                const serverUptime = Math.floor(Math.random() * 100);
+                const commandsExecuted = Math.floor(Math.random() * 10);
+                realTimeData.labels.push(currentTimestamp);
+                realTimeData.datasets[0].data.push(onlineUsers);
+                realTimeData.datasets[1].data.push(receivedMessages);
+                realTimeData.datasets[2].data.push(serverUptime);
+                realTimeData.datasets[3].data.push(commandsExecuted);
+
+                lineChart.update();
+                setTimeout(updateRealTimeChart, 1000);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                updateRealTimeChart();
+            });
+        </script>
+
+        <script>
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+
+            const isDarkMode = JSON.parse(localStorage.getItem('darkMode'));
+
+            if (isDarkMode) {
+                body.classList.add('dark');
+                darkModeToggle.checked = true;
+            }
+
+            darkModeToggle.addEventListener('change', () => {
+                if (darkModeToggle.checked) {
+                    body.classList.add('dark');
+                    localStorage.setItem('darkMode', true);
+                } else {
+                    body.classList.remove('dark');
+                    localStorage.setItem('darkMode', false);
+                }
+            });
+
+            const audioList = [
+                {
+                    "audioFile": "_____.mp3",
+                    "imageFile": "_____.png",
+                    "title": "夜に駆ける",
+                    "artist": "YOASOBI"
+                },
+                {
+                    "audioFile": "Blinding_Lights.mp3",
+                    "imageFile": "Blinding_Lights.png",
+                    "title": "Blinding Lights",
+                    "artist": "The Weeknd"
+                },
+                {
+                    "audioFile": "rockstar__feat__21_Savage_.mp3",
+                    "imageFile": "rockstar__feat__21_Savage_.png",
+                    "title": "Rockstar (feat. 21 Savage)",
+                    "artist": "Post Malone"
+                },
+                {
+                    "audioFile": "Shape_of_You.mp3",
+                    "imageFile": "Shape_of_You.png",
+                    "title": "Shape of You",
+                    "artist": "Ed Sheeran"
+                },
+                {
+                    "audioFile": "Shinunoga_E-Wa.mp3",
+                    "imageFile": "Shinunoga_E-Wa.png",
+                    "title": "Shinunoga E-Wa",
+                    "artist": "Fujii Kaze"
+                },
+                {
+                    "audioFile": "Starboy.mp3",
+                    "imageFile": "Starboy.png",
+                    "title": "Starboy",
+                    "artist": "The Weeknd"
+                },
+                {
+                    "audioFile": "Sunflower_-_Spider-Man__Into_the_Spider-Verse.mp3",
+                    "imageFile": "Sunflower_-_Spider-Man__Into_the_Spider-Verse.png",
+                    "title": "Sunflower",
+                    "artist": "Post Malone"
+                }
+            ];
+
+
+            let currentSongIndex = 0;
+            let isPlaying = false;
+            let isRepeating = false;
+            let isShuffling = false;
+            let isLiked = false;
+            let shuffledSongIndices = shuffleIndices(audioList.length);
+
+            const audio = new Audio(`./assets/audio/${audioList[currentSongIndex].audioFile}`);
+
+            const playPauseButton = document.querySelector(".fa-play");
+            const prevButton = document.querySelector(".fa-backward");
+            const nextButton = document.querySelector(".fa-forward");
+            const shuffleButton = document.querySelector(".fa-random");
+            const seekBar = document.querySelector("input[type='range']");
+            const currentTimeElement = document.querySelector(".current-time");
+            const totalTimeElement = document.querySelector(".total-time");
+            const repeatButton = document.querySelector(".fa-redo-alt");
+            const heartIcon = document.querySelector(".fa-heart");
+
+            let prevClickTime = 0;
+
+            playPauseButton.addEventListener("click", togglePlayPause);
+            prevButton.addEventListener("click", playPreviousSong);
+            nextButton.addEventListener("click", playNextSong);
+            repeatButton.addEventListener("click", toggleRepeat);
+            shuffleButton.addEventListener("click", toggleShuffle);
+            heartIcon.addEventListener("click", toggleLike);
+            seekBar.addEventListener("input", seekAudio);
+            audio.addEventListener("timeupdate", updateProgressBar);
+            audio.addEventListener("ended", playNextSong);
+
+            loadPlayerData();
+            updateUI();
+
+            function togglePlayPause() {
+                if (isPlaying) {
+                    audio.pause();
+                } else {
                     audio.play();
+                }
+                isPlaying = !isPlaying;
+                updatePlayPauseIcon();
+                savePlayerData();
+            }
+
+            function playPreviousSong() {
+                const currentTime = new Date().getTime();
+                if (currentTime - prevClickTime < 300) {
+                    const skipAmount = 10;
+                    audio.currentTime = Math.max(audio.currentTime - skipAmount, 0);
+                } else {
+                    prevClickTime = currentTime;
+                    currentSongIndex = (currentSongIndex - 1 + audioList.length) % audioList.length;
+                    playCurrentSong();
                     savePlayerData();
                 }
+            }
 
-                function toggleRepeat() {
-                    isRepeating = !isRepeating;
-                    repeatButton.classList.toggle("text-blue-500", isRepeating);
-                    audio.loop = isRepeating;
-                    savePlayerData();
-                }
-
-                function toggleShuffle() {
-                    isShuffling = !isShuffling;
-                    shuffleButton.classList.toggle("text-blue-500", isShuffling);
+            function playNextSong() {
+                const currentTime = new Date().getTime();
+                if (currentTime - prevClickTime < 300) {
+                    const skipAmount = 10;
+                    audio.currentTime = Math.min(audio.currentTime + skipAmount, audio.duration);
+                } else {
+                    prevClickTime = currentTime;
                     if (isShuffling) {
-                        shuffledSongIndices = shuffleIndices(audioList.length);
-                        if (shuffledSongIndices[0] === currentSongIndex) {
-                            shuffledSongIndices.shift();
-                            shuffledSongIndices.push(currentSongIndex);
+                        currentSongIndex = shuffledSongIndices.shift();
+                        if (shuffledSongIndices.length === 0) {
+                            shuffledSongIndices = shuffleIndices(audioList.length);
                         }
+                    } else {
+                        currentSongIndex = (currentSongIndex + 1) % audioList.length;
                     }
+                    playCurrentSong();
                     savePlayerData();
                 }
+            }
 
-                function toggleLike() {
-                    isLiked = !isLiked;
+            function playCurrentSong() {
+                audio.src = `./assets/audio/${audioList[currentSongIndex].audioFile}`;
+                coverImage.src = `./public/img/${audioList[currentSongIndex].imageFile}`;
+                songTitle.textContent = audioList[currentSongIndex].title;
+                artistName.textContent = audioList[currentSongIndex].artist;
+                audio.play();
+                savePlayerData();
+            }
+
+            function toggleRepeat() {
+                isRepeating = !isRepeating;
+                repeatButton.classList.toggle("text-blue-500", isRepeating);
+                audio.loop = isRepeating;
+                savePlayerData();
+            }
+
+            function toggleShuffle() {
+                isShuffling = !isShuffling;
+                shuffleButton.classList.toggle("text-blue-500", isShuffling);
+                if (isShuffling) {
+                    shuffledSongIndices = shuffleIndices(audioList.length);
+                    if (shuffledSongIndices[0] === currentSongIndex) {
+                        shuffledSongIndices.shift();
+                        shuffledSongIndices.push(currentSongIndex);
+                    }
+                }
+                savePlayerData();
+            }
+
+            function toggleLike() {
+                isLiked = !isLiked;
+                heartIcon.classList.toggle("text-red-500", isLiked);
+                savePlayerData();
+            }
+
+            function updateProgressBar() {
+                const currentTime = audio.currentTime;
+                const totalTime = audio.duration;
+
+                currentTimeElement.textContent = formatTime(currentTime);
+                totalTimeElement.textContent = formatTime(totalTime);
+
+                const progress = (currentTime / totalTime) * 100;
+                seekBar.value = progress;
+
+                const progressBar = document.querySelector(".progress-bar");
+                progressBar.style.width = `${progress}%`;
+
+                const progressDot = document.querySelector(".bg-blue-500 > .bg-blue-500");
+                const progressBarWidth = progressBar.offsetWidth;
+                const dotPosition = (progressBarWidth * progress) / 100;
+                progressDot.style.transform = `translateX(${dotPosition}px)`;
+            }
+
+            function seekAudio() {
+                const seekTime = (seekBar.value / 100) * audio.duration;
+                audio.currentTime = seekTime;
+
+                const progressBar = document.querySelector(".progress-bar");
+                progressBar.style.animation = "none";
+                savePlayerData();
+            }
+
+            function updatePlayPauseIcon() {
+                playPauseButton.classList.toggle("fa-play", !isPlaying);
+                playPauseButton.classList.toggle("fa-pause", isPlaying);
+            }
+
+            function updateUI() {
+                // Update UI elements (cover image, song title, artist name)
+            }
+
+            function savePlayerData() {
+                const playerData = {
+                    currentSongIndex,
+                    currentTime: audio.currentTime,
+                    isRepeating,
+                    isShuffling,
+                    isLiked
+                };
+                localStorage.setItem("playerData", JSON.stringify(playerData));
+            }
+
+            function loadPlayerData() {
+                const playerData = JSON.parse(localStorage.getItem("playerData"));
+                if (playerData) {
+                    currentSongIndex = playerData.currentSongIndex;
+                    isRepeating = playerData.isRepeating;
+                    isShuffling = playerData.isShuffling;
+                    isLiked = playerData.isLiked;
+
+                    audio.currentTime = playerData.currentTime;
+
+                    repeatButton.classList.toggle("text-blue-500", isRepeating);
+                    shuffleButton.classList.toggle("text-blue-500", isShuffling);
                     heartIcon.classList.toggle("text-red-500", isLiked);
-                    savePlayerData();
+
+                    updatePlayPauseIcon();
                 }
+            }
 
-                function updateProgressBar() {
-                    const currentTime = audio.currentTime;
-                    const totalTime = audio.duration;
-
-                    currentTimeElement.textContent = formatTime(currentTime);
-                    totalTimeElement.textContent = formatTime(totalTime);
-
-                    const progress = (currentTime / totalTime) * 100;
-                    seekBar.value = progress;
-
-                    const progressBar = document.querySelector(".progress-bar");
-                    progressBar.style.width = `${progress}%`;
-
-                    const progressDot = document.querySelector(".bg-blue-500 > .bg-blue-500");
-                    const progressBarWidth = progressBar.offsetWidth;
-                    const dotPosition = (progressBarWidth * progress) / 100;
-                    progressDot.style.transform = `translateX(${dotPosition}px)`;
+            function shuffleIndices(length) {
+                const indices = Array.from({ length }, (_, i) => i);
+                for (let i = indices.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [indices[i], indices[j]] = [indices[j], indices[i]];
                 }
+                return indices;
+            }
 
-                function seekAudio() {
-                    const seekTime = (seekBar.value / 100) * audio.duration;
-                    audio.currentTime = seekTime;
+            function formatTime(time) {
+                const minutes = Math.floor(time / 60);
+                const seconds = Math.floor(time % 60);
+                return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+            }
 
-                    const progressBar = document.querySelector(".progress-bar");
-                    progressBar.style.animation = "none";
-                    savePlayerData();
-                }
+            audio.addEventListener("timeupdate", saveCurrentTime);
 
-                function updatePlayPauseIcon() {
-                    playPauseButton.classList.toggle("fa-play", !isPlaying);
-                    playPauseButton.classList.toggle("fa-pause", isPlaying);
-                }
-
-                function updateUI() {
-                    // Update UI elements (cover image, song title, artist name)
-                }
-
-                function savePlayerData() {
-                    const playerData = {
-                        currentSongIndex,
-                        currentTime: audio.currentTime,
-                        isRepeating,
-                        isShuffling,
-                        isLiked
-                    };
+            // Fungsi untuk menyimpan waktu lagu saat diputar
+            function saveCurrentTime() {
+                if (isPlaying) {
+                    const playerData = JSON.parse(localStorage.getItem("playerData")) || {};
+                    playerData.currentTime = audio.currentTime;
                     localStorage.setItem("playerData", JSON.stringify(playerData));
                 }
+            }
 
-                function loadPlayerData() {
-                    const playerData = JSON.parse(localStorage.getItem("playerData"));
-                    if (playerData) {
-                        currentSongIndex = playerData.currentSongIndex;
-                        isRepeating = playerData.isRepeating;
-                        isShuffling = playerData.isShuffling;
-                        isLiked = playerData.isLiked;
 
-                        audio.currentTime = playerData.currentTime;
+            playCurrentSong();
 
-                        repeatButton.classList.toggle("text-blue-500", isRepeating);
-                        shuffleButton.classList.toggle("text-blue-500", isShuffling);
-                        heartIcon.classList.toggle("text-red-500", isLiked);
+            function toggleFeatures() {
+                const featuresList = document.getElementById('featuresList');
+                const featureToggleIcon = document.getElementById('featureToggleIcon');
 
-                        updatePlayPauseIcon();
-                    }
+                featuresList.classList.toggle('hidden');
+                if (featuresList.classList.contains('hidden')) {
+                    featureToggleIcon.classList.remove('fa-chevron-up');
+                    featureToggleIcon.classList.add('fa-chevron-down');
+                } else {
+                    featureToggleIcon.classList.remove('fa-chevron-down');
+                    featureToggleIcon.classList.add('fa-chevron-up');
                 }
-
-                function shuffleIndices(length) {
-                    const indices = Array.from({ length }, (_, i) => i);
-                    for (let i = indices.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [indices[i], indices[j]] = [indices[j], indices[i]];
-                    }
-                    return indices;
-                }
-
-                function formatTime(time) {
-                    const minutes = Math.floor(time / 60);
-                    const seconds = Math.floor(time % 60);
-                    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-                }
-
-                audio.addEventListener("timeupdate", saveCurrentTime);
-
-                // Fungsi untuk menyimpan waktu lagu saat diputar
-                function saveCurrentTime() {
-                    if (isPlaying) {
-                        const playerData = JSON.parse(localStorage.getItem("playerData")) || {};
-                        playerData.currentTime = audio.currentTime;
-                        localStorage.setItem("playerData", JSON.stringify(playerData));
-                    }
-                }
+            }
 
 
-                playCurrentSong();
+            const searchInput = document.querySelector('input[type="text"]');
 
-                function toggleFeatures() {
-                    const featuresList = document.getElementById('featuresList');
-                    const featureToggleIcon = document.getElementById('featureToggleIcon');
+            searchInput.addEventListener('input', function () {
+                const searchTerm = searchInput.value.toLowerCase();
 
-                    featuresList.classList.toggle('hidden');
-                    if (featuresList.classList.contains('hidden')) {
-                        featureToggleIcon.classList.remove('fa-chevron-up');
-                        featureToggleIcon.classList.add('fa-chevron-down');
+                for (let i = 1; i <= 20; i++) {
+                    const peraturanDiv = document.getElementById('peraturan' + i);
+                    const judulPeraturan = peraturanDiv.querySelector('h2').textContent.toLowerCase();
+
+                    if (judulPeraturan.includes(searchTerm)) {
+                        peraturanDiv.style.display = 'block';
                     } else {
-                        featureToggleIcon.classList.remove('fa-chevron-down');
-                        featureToggleIcon.classList.add('fa-chevron-up');
+                        peraturanDiv.style.display = 'none';
                     }
                 }
+            });
 
+            document.addEventListener('DOMContentLoaded', function () {
+                const myDiv = document.getElementById('myDiv');
+                const menuItems = document.querySelectorAll('.sidebar-menu-item');
+                const contentDivs = document.querySelectorAll('.content-div');
+                const killuaBotLink = document.getElementById('killua-bot-link');
+                const dashboardDiv = document.getElementById('dashboardDiv'); // Tambahkan ini
 
-                const searchInput = document.querySelector('input[type="text"]');
-
-                searchInput.addEventListener('input', function () {
-                    const searchTerm = searchInput.value.toLowerCase();
-
-                    for (let i = 1; i <= 20; i++) {
-                        const peraturanDiv = document.getElementById('peraturan' + i);
-                        const judulPeraturan = peraturanDiv.querySelector('h2').textContent.toLowerCase();
-
-                        if (judulPeraturan.includes(searchTerm)) {
-                            peraturanDiv.style.display = 'block';
-                        } else {
-                            peraturanDiv.style.display = 'none';
-                        }
-                    }
+                myDiv.addEventListener('click', () => {
+                    myDiv.style.display = 'block';
                 });
 
-                document.addEventListener('DOMContentLoaded', function () {
-                    const myDiv = document.getElementById('myDiv');
-                    const menuItems = document.querySelectorAll('.sidebar-menu-item');
-                    const contentDivs = document.querySelectorAll('.content-div');
-                    const killuaBotLink = document.getElementById('killua-bot-link');
-                    const dashboardDiv = document.getElementById('dashboardDiv'); // Tambahkan ini
+                const lastSelectedIndex = localStorage.getItem('lastSelectedIndex');
 
-                    myDiv.addEventListener('click', () => {
-                        myDiv.style.display = 'block';
+                if (lastSelectedIndex !== null) {
+                    contentDivs.forEach(div => {
+                        div.style.display = 'none';
                     });
+                    contentDivs[lastSelectedIndex].style.display = 'block';
+                }
 
-                    const lastSelectedIndex = localStorage.getItem('lastSelectedIndex');
-
-                    if (lastSelectedIndex !== null) {
+                menuItems.forEach((menuItem, index) => {
+                    menuItem.addEventListener('click', () => {
                         contentDivs.forEach(div => {
                             div.style.display = 'none';
                         });
-                        contentDivs[lastSelectedIndex].style.display = 'block';
-                    }
-
-                    menuItems.forEach((menuItem, index) => {
-                        menuItem.addEventListener('click', () => {
-                            contentDivs.forEach(div => {
-                                div.style.display = 'none';
-                            });
-                            contentDivs[index].style.display = 'block';
-                            localStorage.setItem('lastSelectedIndex', index);
-                        });
-                    });
-
-                    killuaBotLink.addEventListener('click', (event) => {
-                        event.preventDefault();
-
-                        contentDivs.forEach(div => {
-                            div.style.display = 'none';
-                        });
-                        dashboardDiv.style.display = 'block';
-                        localStorage.setItem('lastSelectedIndex', 0); // Menyimpan nilai -1 untuk dashboard
+                        contentDivs[index].style.display = 'block';
+                        localStorage.setItem('lastSelectedIndex', index);
                     });
                 });
 
-                function updateValue(elementId, minIncrement, maxIncrement) {
-                    const element = document.getElementById(elementId);
-                    const currentValue = parseInt(element.textContent.replace(/,/g, ''));
-                    const randomIncrement = Math.floor(Math.random() * (maxIncrement - minIncrement + 1)) + minIncrement;
-                    const newValue = currentValue + randomIncrement;
-                    element.textContent = newValue.toLocaleString();
-                }
+                killuaBotLink.addEventListener('click', (event) => {
+                    event.preventDefault();
 
-                function updateData() {
-                    updateValue('totalMessages', 2, 7);
-                    updateValue('totalUsers', 5, 15);
-                    updateValue('totalCommands', 50, 150);
-                }
+                    contentDivs.forEach(div => {
+                        div.style.display = 'none';
+                    });
+                    dashboardDiv.style.display = 'block';
+                    localStorage.setItem('lastSelectedIndex', 0); // Menyimpan nilai -1 untuk dashboard
+                });
+            });
 
-                setInterval(updateData, 15000);
+            function updateValue(elementId, minIncrement, maxIncrement) {
+                const element = document.getElementById(elementId);
+                const currentValue = parseInt(element.textContent.replace(/,/g, ''));
+                const randomIncrement = Math.floor(Math.random() * (maxIncrement - minIncrement + 1)) + minIncrement;
+                const newValue = currentValue + randomIncrement;
+                element.textContent = newValue.toLocaleString();
+            }
 
-                function updateServerUptime() {
-                    const uptimeElement = document.getElementById('serverUptime');
-                    const currentUptime = parseFloat(uptimeElement.textContent.replace('%', ''));
-                    const randomIncrement = Math.random() * 30 + 70;
-                    const newUptime = Math.min(randomIncrement, 100.0);
-                    uptimeElement.textContent = newUptime.toFixed(1) + '%';
-                }
+            function updateData() {
+                updateValue('totalMessages', 2, 7);
+                updateValue('totalUsers', 5, 15);
+                updateValue('totalCommands', 50, 150);
+            }
 
-                setInterval(updateServerUptime, 1000);
-                updateServerUptime();
-            </script>
-    </body>
+            setInterval(updateData, 15000);
+
+            function updateServerUptime() {
+                const uptimeElement = document.getElementById('serverUptime');
+                const currentUptime = parseFloat(uptimeElement.textContent.replace('%', ''));
+                const randomIncrement = Math.random() * 30 + 70;
+                const newUptime = Math.min(randomIncrement, 100.0);
+                uptimeElement.textContent = newUptime.toFixed(1) + '%';
+            }
+
+            setInterval(updateServerUptime, 1000);
+            updateServerUptime();
+        </script>
+</body>
 
 </html>
